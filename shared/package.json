@@ -1,0 +1,9 @@
+{
+  "name": "@impulse/shared",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Shared TypeScript contracts (types, DTOs, enums) for the Impulse Storefront client and server.",
+  "main": "src/types/index.ts",
+  "types": "src/types/index.ts"
+}

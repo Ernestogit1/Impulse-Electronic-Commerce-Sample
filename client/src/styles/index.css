@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Semantic theme tokens as CSS variables (mirrors src/theme/tokens.ts).
+ * Brand = electric cyan on deep navy, from the Impulse Software Solutions logo.
+ * ThemeModeProvider toggles `.theme-dark` / `.theme-light` on <html>.
+ */
+:root,
+.theme-dark {
+  color-scheme: dark;
+  --c-canvas: #070f17;
+  --c-surface: #0e1925;
+  --c-elevated: #142231;
+  --c-line: #1e2e3c;
+  --c-content: #eaf2f6;
+  --c-muted: #8fa3b0;
+  --c-brand: #2dd4e1;
+  --c-brand-contrast: #06121a;
+  --shadow-card: 0 10px 34px -8px rgba(0, 0, 0, 0.55);
+  --grid-line: rgba(45, 212, 225, 0.06);
+}
+
+.theme-light {
+  color-scheme: light;
+  --c-canvas: #f6f9fb;
+  --c-surface: #ffffff;
+  --c-elevated: #ffffff;
+  --c-line: #e2e9ee;
+  --c-content: #0b1620;
+  --c-muted: #475a68;
+  --c-brand: #0e97ac;
+  --c-brand-contrast: #ffffff;
+  --shadow-card: 0 10px 34px -10px rgba(11, 22, 32, 0.16);
+  --grid-line: rgba(14, 151, 172, 0.07);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background-color: var(--c-canvas);
+    color: var(--c-content);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: 'Sora', ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: var(--c-brand);
+    color: var(--c-brand-contrast);
+  }
+}
+
+@layer components {
+  .glass {
+    background: color-mix(in srgb, var(--c-surface) 72%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+  .text-gradient-brand {
+    background: linear-gradient(135deg, #66e7f2 0%, #2dd4e1 45%, #0e97ac 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-grid {
+    background-image: radial-gradient(var(--grid-line) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .focus-ring {
+    outline: none;
+  }
+  .focus-ring:focus-visible {
+    box-shadow: 0 0 0 2px var(--c-canvas), 0 0 0 4px var(--c-brand);
+    border-radius: 10px;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-line) transparent;
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb {
+  background: var(--c-line);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--c-muted);
+  background-clip: content-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
